@@ -995,6 +995,7 @@ sub dispatch_guild_member_update
 {
     my ($self, $hash) = @_;
 
+    #say "Guild Member Update";
     #say Dumper($hash);
     $self->_add_guild_member($hash);
 }
