@@ -741,6 +741,17 @@ sub get_reactions
     $self->rest->get_reactions($channel, $msgid, $emoji, $callback);
 }
 
+sub get_reactions_p
+{
+    my ($self, $channel, $msgid, $emoji) = @_;
+
+    my $promise = Mojo::Promise->new;
+
+    $self->get_reactions($channel, $msgid, $emoji, sub { $promise->resolve(shift) });
+
+    return $promise;
+}
+
 sub delete_all_reactions
 {
     my ($self, $channel, $msgid, $callback) = @_;
