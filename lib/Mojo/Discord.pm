@@ -440,6 +440,40 @@ sub get_user_p
     return $promise;
 };
 
+# Gets channel information from gateway events that have been stored in memory
+# Synchronous only, as there is no REST lookup here.
+sub get_channel
+{
+    my ($self, $guild_id, $channel_id) = @_;
+
+    # Be smart - Also accept and handle <#channel_id> format.
+    $channel_id =~ s/\<\#(\d+)\>/$1/;
+
+    unless ( $self->_valid_id('get_channel', $guild_id) and $self->_valid_id('get_channel', $channel_id) )
+    {
+        return undef;
+    }
+
+    # Keeping the ternary here in case I want to change the fail behavior...
+    return exists $self->gw->guilds->{$guild_id}->channels->{$channel_id} ?
+        $self->gw->guilds->{$guild_id}->channels->{$channel_id} : undef
+}
+
+# Like get_channel but doesn't return the whole object, just a boolean
+sub channel_exists
+{
+    my ($self, $guild_id, $channel_id) = @_;
+
+    $channel_id =~ s/\<\#(\d+)\>/$1/;
+
+    unless ( $self->_valid_id('get_channel', $guild_id) and $self->_valid_id('get_channel', $channel_id) )
+    {
+        return 0;
+    }
+
+    return exists $self->gw->guilds->{$guild_id}->channels->{$channel_id};
+}
+
 sub get_guilds
 {
     my ($self, $user, $callback) = @_;
