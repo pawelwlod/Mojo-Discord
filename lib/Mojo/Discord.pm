@@ -487,6 +487,13 @@ sub get_guild
     defined $guild_id ? return $self->gw->guilds->{$guild_id} : return undef;
 }
 
+sub get_guild_member
+{
+    my ($self, $guild_id, $member_id) = @_;
+
+    defined $guild_id and defined $member_id ? return $self->gw->guilds->{$guild_id}->members->{$member_id} : return undef;
+}
+
 sub leave_guild
 {
     my ($self, $user, $guild, $callback) = @_;
