@@ -466,6 +466,31 @@ sub set_topic
     $self->rest->set_topic($channel, $topic, $callback);
 }
 
+=head2 get_channel_message()
+    Requires you to pass in the channel id and a message id
+    Retrieves the message and returns it to the callback
+=cut
+sub get_channel_message
+{
+    my ($self, $channel_id, $message_id, $callback) = @_;
+
+    $self->rest->get_channel_message($channel_id, $message_id, $callback);
+}
+
+=head2 get_channel_message_p()
+    Promise version of get_channel_message().
+    It takes a channel ID and a message ID and returns the message object via promise
+=cut
+sub get_channel_message_p
+{
+    my ($self, $channel_id, $message_id) = @_;
+
+    my $promise = Mojo::Promise->new();
+    $self->get_channel_message($channel_id, $message_id, sub{ $promise->resolve(shift) });
+
+    return $promise;
+}
+
 # Supports hashref or string.
 # String for simple messages, hashref if you need to use embeds or tts flag.
 sub send_message
