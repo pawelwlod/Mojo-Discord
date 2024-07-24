@@ -232,15 +232,6 @@ sub send_message
     {
         my $post_url = $self->base_url . "/channels/$dest/messages";
 
-        # Remove this block
-        #my $bucket_id = $self->rate_bucket_ids->{$route} // 'POST /channels';
-        #my $bucket = $self->rate_buckets->{$bucket_id};
-        #my $rate_limits = ' => Bucket: ' . $bucket_id;
-        #$rate_limits .= ', Remaining: ' . $bucket->{'remaining'};
-        #$rate_limits .= ', Reset: ' . $bucket->{'reset'};
-        #$json->{'content'} .= $rate_limits; 
-        # End Remove
-
         $self->ua->post($post_url => {Accept => '*/*'} => json => $json => sub
         {
             my ($ua, $tx) = @_;
@@ -635,7 +626,7 @@ sub create_webhook
 {
     my ($self, $channel, $params, $callback) = @_;
 
-    my $name = $params->{'name'};
+    my $name = $params->{'name'} // 'Mojo::Discord Webhook';
     my $avatar_file = $params->{'avatar'};
 
     # Check the name is valid (2-100 chars)
