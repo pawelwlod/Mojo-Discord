@@ -82,6 +82,7 @@ has intents => ( is => 'ro', default => sub {
     my $DIRECT_MESSAGES             = 1<<12;
     my $DIRECT_MESSAGE_REACTIONS    = 1<<13;
     my $DIRECT_MESSAGE_TYPING       = 1<<14;
+    my $MESSAGE_CONTENT             = 1<<15;
 
     my $intents =   
         $GUILDS |
@@ -92,7 +93,8 @@ has intents => ( is => 'ro', default => sub {
         $GUILD_MESSAGES |
         $GUILD_MESSAGE_REACTIONS |
         $DIRECT_MESSAGES |
-        $DIRECT_MESSAGE_REACTIONS;
+        $DIRECT_MESSAGE_REACTIONS |
+        $MESSAGE_CONTENT;
 
     return $intents;
 });
@@ -174,7 +176,7 @@ has heartbeat_loop      => ( is => 'rw' );
 has heartbeat           => ( is => 'rw', default => 2 );
 has base_url            => ( is => 'ro', default => 'https://discord.com/api' );
 has gateway_url         => ( is => 'rw', default => sub { shift->base_url . '/gateway' });
-has gateway_version     => ( is => 'ro', default => 8 );
+has gateway_version     => ( is => 'ro', default => 10 );
 has gateway_encoding    => ( is => 'ro', default => 'json' );
 has max_websocket_size  => ( is => 'ro', default => 1048576 ); # Should this maybe be a config.ini value??
 has agent               => ( is => 'lazy', builder => sub { my $self = shift; $self->name . ' (' . $self->url . ',' . $self->version . ')' } );
