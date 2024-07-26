@@ -393,9 +393,9 @@ sub create_dm
 # Takes a message ID to react to, a user ID to DM, a message to send, and an optional callback sub.
 sub send_ack_dm
 {
-    my ($self, $message_id, $user_id, $message, $callback) = @_;
+    my ($self, $channel_id, $message_id, $user_id, $message, $callback) = @_;
 
-    $self->rest->send_ack_dm($message_id, $user_id, $message, $callback);
+    $self->rest->send_ack_dm($channel_id, $message_id, $user_id, $message, $callback);
 }
 
 # Acknowledge a command by adding a white check mark emoji reaction and nothing else
