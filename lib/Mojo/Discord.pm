@@ -194,46 +194,58 @@ L<Mojo::Discord> provides these attributes of its submodules, which for the most
 
 =cut
 
-has token       => ( is => 'ro' );
-has name        => ( is => 'ro', default => 'Mojo::Discord' );
-has url         => ( is => 'ro' );
-has version     => ( is => 'ro' );
-has reconnect   => ( is => 'ro' );
-has base_url    => ( is => 'rw', default => 'https://discord.com/api' );
-has gw          => ( is => 'lazy', builder => sub {
-                    my $self = shift;
-                    Mojo::Discord::Gateway->new(
-                        'token'         => $self->token,
-                        'name'          => $self->name,
-                        'url'           => $self->url,
-                        'version'       => $self->version,
-                        'auto_reconnect'=> $self->reconnect,
-                        'base_url'      => $self->base_url,
-                        'log'           => $self->log,
-                        'rest'          => $self->rest,
-                    )});
-has rest        => ( is => 'lazy', builder => sub {
-                    my $self = shift;
-                    Mojo::Discord::REST->new(
-                        'token'         => $self->token,
-                        'name'          => $self->name,
-                        'url'           => $self->url,
-                        'version'       => $self->version,
-                        'base_url'      => $self->base_url,
-                        'log'           => $self->log,
-                    )});
-has guilds      => ( is => 'rw', default => sub {  } );
+has token     => ( is => 'ro' );
+has name      => ( is => 'ro', default => 'Mojo::Discord' );
+has url       => ( is => 'ro' );
+has version   => ( is => 'ro' );
+has reconnect => ( is => 'ro' );
+has base_url  => ( is => 'rw', default => 'https://discord.com/api' );
+has gw => (
+    is      => 'lazy',
+    builder => sub {
+        my $self = shift;
+        Mojo::Discord::Gateway->new(
+            'token'          => $self->token,
+            'name'           => $self->name,
+            'url'            => $self->url,
+            'version'        => $self->version,
+            'auto_reconnect' => $self->reconnect,
+            'base_url'       => $self->base_url,
+            'log'            => $self->log,
+            'rest'           => $self->rest,
+        );
+    }
+);
+has rest => (
+    is      => 'lazy',
+    builder => sub {
+        my $self = shift;
+        Mojo::Discord::REST->new(
+            'token'    => $self->token,
+            'name'     => $self->name,
+            'url'      => $self->url,
+            'version'  => $self->version,
+            'base_url' => $self->base_url,
+            'log'      => $self->log,
+        );
+    }
+);
+has guilds => ( is => 'rw', default => sub { } );
 
 # Logging
-has log         => ( is => 'lazy', builder => sub { 
-                    my $self = shift;
-                    Mojo::Log->new( 
-                        path => $self->logdir . '/' . $self->logfile, 
-                        level => $self->loglevel 
-                    )});
-has logdir      => ( is => 'rw', default => '/var/log/mojo-discord' );
-has logfile     => ( is => 'rw', default => 'mojo-discord.log' );
-has loglevel    => ( is => 'rw', default => 'debug' );
+has log => (
+    is      => 'lazy',
+    builder => sub {
+        my $self = shift;
+        Mojo::Log->new(
+            path  => $self->logdir . '/' . $self->logfile,
+            level => $self->loglevel
+        );
+    }
+);
+has logdir   => ( is => 'rw', default => '/var/log/mojo-discord' );
+has logfile  => ( is => 'rw', default => 'mojo-discord.log' );
+has loglevel => ( is => 'rw', default => 'debug' );
 
 =head1 SUBROUTINES
 
