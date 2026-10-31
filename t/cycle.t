@@ -18,6 +18,6 @@ my $discord = Mojo::Discord->new(
 memory_cycle_ok($discord, "No Memory Cycles");
 weakened_memory_cycle_ok($discord, "No Weakened Memory Cycles");
 
-# Should do more here - connect the $discord object to a Mojolicious::Lite app, do stuff with it, and then check it again.
+# TODO Should do more here - connect the $discord object to a Mojolicious::Lite app, do stuff with it, and then check it again.
 
 done_testing();

@@ -14,7 +14,7 @@ use Data::Dumper;
 ########################
 # This module handles some of the OAuth2 stuff for Discord
 # 
-# For now it really doesn't do much other than take an Auth Code and request a Token.
+# TODO For now it really doesn't do much other than take an Auth Code and request a Token.
 # You also have to pass in the usual name/url/version for the application's UserAgent string,
 # and for this module it also requires the Application's ID and Secret, as well as the Auth Callback URL
 ########################

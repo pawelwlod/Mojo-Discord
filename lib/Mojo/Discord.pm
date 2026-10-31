@@ -824,7 +824,7 @@ sub create_invite
 {
     my ($self, $channel, $params, $callback) = @_;
 
-    # This is so dumb. I should just drop callbacks and go to promises. Or pass parameters as hashrefs so the order doesn't matter.
+    # TODO This is so dumb. I should just drop callbacks and go to promises. Or pass parameters as hashrefs so the order doesn't matter.
     # $params is optional and might be defined with the callback function and we need to sort it out.
     if ( defined $params and ref $params eq 'CODE' )
     {

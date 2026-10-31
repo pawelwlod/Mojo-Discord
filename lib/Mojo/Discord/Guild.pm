@@ -146,7 +146,7 @@ sub add_presence
     return $presence;
 }
 
-sub remove_presence
+sub remove_presence # TODO
 {
 #    my ($self, $presence_id) = @_;
 
@@ -167,7 +167,7 @@ sub add_emoji
     return $emoji;
 }
 
-sub remove_emoji
+sub remove_emoji # TODO
 {
 #    my ($self, $emoji_id) = @_;
 

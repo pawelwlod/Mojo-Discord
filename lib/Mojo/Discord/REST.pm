@@ -398,7 +398,7 @@ sub delete_message
     else    # Scalar - Simple string message. Build a basic json object to send.
     {
         $json = {
-            #'content' => $param
+            # TODO 'content' => $param
         };
     }
 

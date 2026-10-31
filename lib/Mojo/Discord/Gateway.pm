@@ -62,7 +62,7 @@ has dispatches => ( is => 'ro', default => sub {
         'WEBHOOKS_UPDATE'              => \&dispatch_webhooks_update,
         'READY'                        => \&dispatch_ready,
         'SESSIONS_REPLACE'             => \&dispatch_sessions_replace,
-        # More as needed
+        # TODO: Add more as needed
     }
 });
 
@@ -178,7 +178,7 @@ has base_url            => ( is => 'ro', default => 'https://discord.com/api' );
 has gateway_url         => ( is => 'rw', default => sub { shift->base_url . '/gateway' });
 has gateway_version     => ( is => 'ro', default => 10 );
 has gateway_encoding    => ( is => 'ro', default => 'json' );
-has max_websocket_size  => ( is => 'ro', default => 1048576 ); # Should this maybe be a config.ini value??
+has max_websocket_size  => ( is => 'ro', default => 1048576 ); # TODO: Should this maybe be a config.ini value??
 has agent               => ( is => 'lazy', builder => sub { my $self = shift; $self->name . ' (' . $self->url . ',' . $self->version . ')' } );
 has allow_resume        => ( is => 'rw', default => 1 );
 has reconnect_attempt_count => ( is => 'rw', default => -1 );
@@ -701,7 +701,7 @@ sub dispatch_typing_start
 {
 }
 
-sub dispatch_message_create
+sub dispatch_message_create # TODO
 {
    my ($self, $hash) = @_;
    # Update what we know about people when they talk.
@@ -710,27 +710,27 @@ sub dispatch_message_create
    #$self->_member_add($hash->{'author'});
 }
 
-sub dispatch_message_update
+sub dispatch_message_update # TODO
 {
 }
 
-sub dispatch_message_delete
+sub dispatch_message_delete # TODO
 {
 }
 
-sub dispatch_message_reaction_add
+sub dispatch_message_reaction_add # TODO
 {
 }
 
-sub dispatch_message_reaction_remove
+sub dispatch_message_reaction_remove # TODO
 {
 }
 
-sub dispatch_message_reaction_remove_all
+sub dispatch_message_reaction_remove_all # TODO
 {
 }
 
-sub dispatch_sessions_replace
+sub dispatch_sessions_replace # TODO
 {
     my ($self, $hash) = @_;
 
@@ -769,7 +769,7 @@ sub _update_guild
     $self->_set_guild_presences($hash);
     $self->_set_guild_emojis($hash);
     $self->_set_guild_members($hash);
-    # TO-DO: features and voice states
+    # TODO: features and voice states
 }
 
 # Set top level simple guild attributes. 
@@ -927,7 +927,7 @@ sub dispatch_guild_create
     $self->log->debug("Joining Guild " . $guild->id . " => '" . $guild->name . "'");
     say "Joining Guild " . $guild->id . " => " . $guild->name;
 
-    # To-Do:
+    # TODO:
     # Check current permissions to see whether or not I can fetch the entire guild's list of webhooks
     # or if I have to go channel by channel
     # (or if I have no webhook access at all)
@@ -976,7 +976,7 @@ sub dispatch_guild_update
     $self->_update_guild($guild, $hash);
 }
 
-sub dispatch_guild_delete
+sub dispatch_guild_delete # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1015,7 +1015,7 @@ sub dispatch_guild_member_remove
     $guild->remove_member($user_id);
 }
 
-sub dispatch_guild_members_chunk
+sub dispatch_guild_members_chunk # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1060,7 +1060,7 @@ sub dispatch_guild_role_delete
     $guild->remove_role($role_id);
 }
 
-sub dispatch_user_settings_update
+sub dispatch_user_settings_update # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1068,7 +1068,7 @@ sub dispatch_user_settings_update
     #say Dumper($hash);
 }
 
-sub dispatch_user_update
+sub dispatch_user_update # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1076,7 +1076,7 @@ sub dispatch_user_update
     #say Dumper($hash);
 }
 
-sub dispatch_channel_create
+sub dispatch_channel_create # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1084,7 +1084,7 @@ sub dispatch_channel_create
     #say Dumper($hash);
 }
 
-sub dispatch_channel_modify
+sub dispatch_channel_modify # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1092,7 +1092,7 @@ sub dispatch_channel_modify
     #say Dumper($hash);
 }
 
-sub dispatch_channel_delete
+sub dispatch_channel_delete # TODO
 {
     my ($self, $hash) = @_;
 
@@ -1100,7 +1100,7 @@ sub dispatch_channel_delete
     #say Dumper($hash);
 }
 
-sub dispatch_presence_update
+sub dispatch_presence_update # TODO
 {
     my ($self, $hash) = @_;
     
